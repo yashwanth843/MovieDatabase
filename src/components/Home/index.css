@@ -1,0 +1,11 @@
+.HomeContainer {
+  background-color: #000000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.popularDataUnorderList {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}

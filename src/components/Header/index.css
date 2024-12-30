@@ -1,0 +1,55 @@
+.headerContainer {
+  background-color: #4682b4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoName {
+  color: #ffffff;
+  font-family: 'Roboto';
+  margin-left: 10px;
+  font-size: 18px;
+  margin-right: 4px;
+}
+
+.inputContainer {
+  display: flex;
+}
+
+.inputBar {
+  width: 250px;
+  height: 30px;
+  padding-left: 10px;
+  color: gray;
+  font-family: 'Roboto';
+  outline: none;
+}
+
+.searchButton {
+  width: 75px;
+  height: 30px;
+  cursor: pointer;
+  background-color: rgb(126, 126, 235);
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  font-family: 'Roboto';
+}
+
+.navigationContainer {
+  display: flex;
+  background-color: #4682b4;
+  margin-right: 15px;
+  gap: 20px;
+}
+
+.navLink {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 14px;
+}
+
+.navbarLink {
+  text-decoration: none;
+}

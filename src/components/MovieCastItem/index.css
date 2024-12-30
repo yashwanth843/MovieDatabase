@@ -1,0 +1,22 @@
+.casteListContainer {
+  list-style: none;
+  border: 1px solid black;
+  width: fit-content;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+  line-height: 10px;
+}
+
+.castImage {
+  width: 150px;
+  height: 200px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.originalName {
+  color: rgb(8, 7, 7);
+  font-family: 'Roboto';
+  font-size: 14px;
+}

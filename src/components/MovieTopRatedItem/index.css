@@ -1,0 +1,55 @@
+.topmovielist {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.toptitleContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.toptitle {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.toprating {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.topImage {
+  width: 150px;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.topImage:hover {
+  filter: contrast(1.2) brightness(1.1);
+  box-shadow:
+    inset 2px 2px 5px rgba(0, 0, 0, 0.4),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.8);
+  transform: scale(1.05);
+}
+
+.topviewButton {
+  margin-top: 0;
+  margin-bottom: 8px;
+  width: 120px;
+  height: 30px;
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  font-family: 'Roboto';
+  background-color: rgb(72, 170, 250);
+  cursor: pointer;
+}

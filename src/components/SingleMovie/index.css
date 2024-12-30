@@ -1,0 +1,77 @@
+.SingleMoviesContainer {
+  background-color: #000000;
+  min-height: 100vh;
+}
+.singleMovieContainer {
+  background-color: rgb(66, 190, 248);
+  padding: 30px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.singleMovieImage {
+  width: 300px;
+  height: 400px;
+  border-radius: 10px;
+}
+
+.genresContainer {
+  display: flex;
+  margin-left: 0;
+}
+
+.movieName {
+  color: rgb(12, 1, 1);
+  font-family: 'Roboto';
+}
+
+.releaseDate {
+  color: #ffffff;
+  font-family: 'Roboto';
+  margin-right: 0;
+}
+
+.genresName {
+  list-style: none;
+  color: #ffffff;
+  font-family: 'Roboto';
+}
+
+.dateContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.duration {
+  color: #ffffff;
+  font-family: 'Roboto';
+}
+
+.rating {
+  color: #ffffff;
+  font-family: 'Roboto';
+}
+
+.overViewhead {
+  color: rgb(12, 1, 1);
+  font-family: 'Roboto';
+}
+
+.overView {
+  color: #ffffff;
+  font-family: 'Roboto';
+}
+
+.tagline {
+  color: rgb(149, 147, 147);
+  font-family: 'Roboto';
+}
+
+.loadingContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 250px;
+}

@@ -1,0 +1,12 @@
+.casteItemContainer {
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  text-align: center;
+}
+
+.casteHead {
+  color: #ffffff;
+  font-family: "Roboto";
+  margin-left: 35px;
+}
