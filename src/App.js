@@ -14,7 +14,7 @@ const App = () => (
     <Route exact path="/top-rated" component={TopRated} />
     <Route exact path="/upcoming" component={Upcoming} />
     <Route exact path="/movies/:id" component={SingleMovie} />
-    <Route exact path="/search" component={MovieSearchItem} />
+    <Route exact path="/search/:query" component={MovieSearchItem} />
   </Switch>
 )
 

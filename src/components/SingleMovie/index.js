@@ -13,7 +13,7 @@ const apiStatusContant = {
 }
 
 class SingleMovie extends Component {
-  state = {singleMovieData: {}, apiStatus: apiStatusContant.initial, years: ''}
+  state = {singleMovieData: {}, apiStatus: apiStatusContant.initial}
 
   componentDidMount() {
     this.getSingleMovieData()
@@ -22,6 +22,7 @@ class SingleMovie extends Component {
   getSingleMovieData = async () => {
     this.setState({apiStatus: apiStatusContant.inProgress})
     const {match} = this.props
+    console.log(match)
     const {params} = match
     const {id} = params
     const apiKey = 'dd72515ce3284d70cef8f7b1c4369371'
@@ -80,13 +81,12 @@ class SingleMovie extends Component {
     const originalTime = this.changeToOrginalTime(duration)
     const changeDate = this.changeToNormalDate(releaseDate)
     const [year] = releaseDate.split('-')
-    const changedRate = Math.round(rating * 10)
 
     return (
       <>
         <div className="singleMovieContainer">
           <img
-            src={`https://image.tmdb.org/t/p/w500/${imageUrl}`}
+            src={`https://image.tmdb.org/t/p/w500${imageUrl}`}
             alt="movie details"
             className="singleMovieImage"
           />
@@ -104,7 +104,7 @@ class SingleMovie extends Component {
               <p className="duration">• {originalTime}</p>
             </div>
             <div className="ratingContainer">
-              <p className="rating">Rating: {changedRate}%</p>
+              <p className="rating">Rating: {rating}</p>
             </div>
             <p className="tagline">{tagline}</p>
             <h1 className="overViewhead">OverView</h1>

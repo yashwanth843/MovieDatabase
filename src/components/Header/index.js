@@ -1,86 +1,22 @@
 import {Component} from 'react'
-import {Link} from 'react-router-dom'
-import MovieSearchItem from '../MovieSearchItem'
+import {Link, withRouter} from 'react-router-dom'
+
 import './index.css'
 
-const apiStatusContant = {
-  initial: 'INITIAL',
-  success: 'SUCCESS',
-  failure: 'FAILURE',
-  inProgress: 'IN_PROGRESS',
-}
-
 class Header extends Component {
-  state = {searchData: [], apiStatus: apiStatusContant.initial, searchInput: ''}
-
-  componentDidMount() {
-    this.getSearchData()
-  }
-
-  getSearchData = async () => {
-    const {searchInput} = this.state
-
-    this.setState({apiStatus: apiStatusContant.inProgress})
-    const apiKey = 'dd72515ce3284d70cef8f7b1c4369371'
-    const uri = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchInput}&page=1`
-    const options = {
-      method: 'GET',
-    }
-    const response = await fetch(uri, options)
-
-    if (response.ok) {
-      const searchedData = await response.json()
-      const searchUpdated = searchedData.results.map(movie => ({
-        id: movie.id,
-        imageUrl: movie.poster_path,
-        title: movie.title,
-        rating: movie.vote_average,
-      }))
-      this.setState({
-        searchData: searchUpdated,
-        apiStatus: apiStatusContant.success,
-      })
-    } else {
-      this.setState({apiStatus: apiStatusContant.failure})
-    }
-  }
-
-  renderSearchedMovie = () => {
-    const {searchData} = this.state
-    console.log(searchData)
-    return (
-      <ul className="searchDataUnorderList">
-        {searchData.map(each => (
-          <MovieSearchItem searchData={each} key={each.id} />
-        ))}
-      </ul>
-    )
-  }
-
-  renderSearchLoading = () => (
-    <div className="searchLoading">
-      <p>Loading...</p>
-    </div>
-  )
-
-  renderSearchMovieResult = () => {
-    const {apiStatus} = this.state
-    switch (apiStatus) {
-      case apiStatusContant.success:
-        return this.renderSearchedMovie()
-      case apiStatusContant.inProgress:
-        return this.renderSearchLoading()
-      default:
-        return null
-    }
-  }
+  state = {searchInput: ''}
 
   onChangeSearch = event => {
     this.setState({searchInput: event.target.value})
   }
 
   onClickSearchButton = () => {
-    this.getSearchData()
+    const {searchInput} = this.state
+    const {history} = this.props
+    if (searchInput) {
+      history.push(`/search/${searchInput}`)
+    }
+    this.setState({searchInput: ''})
   }
 
   render() {
@@ -97,7 +33,9 @@ class Header extends Component {
               type="search"
               placeholder="Search Movies"
               className="inputBar"
+              value={searchInput}
               onChange={this.onChangeSearch}
+              role="textbox"
             />
 
             <button
@@ -120,12 +58,9 @@ class Header extends Component {
             </Link>
           </div>
         </nav>
-        <div className="searchResultsContainer">
-          {this.renderSearchMovieResult()}
-        </div>
       </>
     )
   }
 }
 
-export default Header
+export default withRouter(Header)
