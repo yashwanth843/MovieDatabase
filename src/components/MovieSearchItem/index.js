@@ -12,7 +12,12 @@ const apiStatusContant = {
 }
 
 class MovieSearchItem extends Component {
-  state = {searchedMovieData: [], apiStatus: apiStatusContant.initial}
+  state = {
+    searchedMovieData: [],
+    apiStatus: apiStatusContant.initial,
+    page: 1,
+    totalPages: 0,
+  }
 
   componentDidMount() {
     this.getSearchMovieData()
@@ -31,18 +36,20 @@ class MovieSearchItem extends Component {
 
   getSearchMovieData = async () => {
     this.setState({apiStatus: apiStatusContant.inProgress})
+    const {page} = this.state
     const {match} = this.props
     console.log(match)
     const {params} = match
     const {query} = params
     const apiKey = 'dd72515ce3284d70cef8f7b1c4369371'
-    const uri = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${query}&page=1`
+    const uri = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${query}&page=${page}`
     const options = {
       method: 'GET',
     }
     const response = await fetch(uri, options)
     if (response.ok) {
       const searchData = await response.json()
+      const pages = searchData.total_pages
       console.log(searchData)
       const searchUpdated = searchData.results.map(each => ({
         id: each.id,
@@ -52,6 +59,7 @@ class MovieSearchItem extends Component {
       }))
       this.setState({
         searchedMovieData: searchUpdated,
+        totalPages: pages,
         apiStatus: apiStatusContant.success,
       })
     } else {
@@ -61,6 +69,26 @@ class MovieSearchItem extends Component {
 
   onClickTryButton = () => {
     this.getSearchMovieData()
+  }
+
+  onClickNextButton = () => {
+    const {totalPages, page} = this.state
+    if (page !== totalPages) {
+      this.setState(
+        prevState => ({page: prevState.page + 1}),
+        this.getSearchMovieData,
+      )
+    }
+  }
+
+  onClickPrevButton = () => {
+    const {page} = this.state
+    if (page !== 1) {
+      this.setState(
+        prevState => ({page: prevState.page - 1}),
+        this.getSearchMovieData,
+      )
+    }
   }
 
   renderSearchSuccess = () => {
@@ -108,10 +136,28 @@ class MovieSearchItem extends Component {
   }
 
   render() {
+    const {page} = this.state
     return (
       <div className="searchMovieContainer">
         <Header />
         <div className="searchDataContainer">{this.renderSearchResult()}</div>
+        <div className="pageContainer">
+          <button
+            type="button"
+            className="prevButton"
+            onClick={this.onClickPrevButton}
+          >
+            Prev
+          </button>
+          <p className="pageCount">{page}</p>
+          <button
+            type="button"
+            className="prevButton"
+            onClick={this.onClickNextButton}
+          >
+            Next
+          </button>
+        </div>
       </div>
     )
   }

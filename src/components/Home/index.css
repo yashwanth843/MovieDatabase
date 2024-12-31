@@ -9,3 +9,26 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }
+
+.pageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.prevButton {
+  background-color: #ffffff;
+  border: none;
+  width: 40px;
+  height: 20px;
+  color: rgb(11, 10, 10);
+  font-family: 'Roboto';
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.pageCount {
+  color: #ffffff;
+  font-family: "Roboto";
+}

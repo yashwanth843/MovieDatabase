@@ -12,7 +12,12 @@ const apiStatusContant = {
 }
 
 class Home extends Component {
-  state = {popularData: [], apiStatus: apiStatusContant.initial}
+  state = {
+    popularData: [],
+    apiStatus: apiStatusContant.initial,
+    page: 1,
+    totalPages: 0,
+  }
 
   componentDidMount() {
     this.getPopularData()
@@ -20,14 +25,17 @@ class Home extends Component {
 
   getPopularData = async () => {
     this.setState({apiStatus: apiStatusContant.inProgress})
+    const {page} = this.state
     const apiKey = 'dd72515ce3284d70cef8f7b1c4369371'
-    const uri = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
+    const uri = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`
     const options = {
       method: 'GET',
     }
     const response = await fetch(uri, options)
     if (response.ok) {
       const popularData = await response.json()
+      console.log(popularData)
+      const pages = popularData.total_pages
       const popularUpdatedData = popularData.results.map(movie => ({
         id: movie.id,
         imageUrl: movie.poster_path,
@@ -36,6 +44,7 @@ class Home extends Component {
       }))
       this.setState({
         popularData: popularUpdatedData,
+        totalPages: pages,
         apiStatus: apiStatusContant.success,
       })
     } else {
@@ -43,8 +52,24 @@ class Home extends Component {
     }
   }
 
-  popularSingleId = id => {
-    console.log(id)
+  onClickNextButton = () => {
+    const {totalPages, page} = this.state
+    if (page !== totalPages) {
+      this.setState(
+        prevState => ({page: prevState.page + 1}),
+        this.getPopularData,
+      )
+    }
+  }
+
+  onClickPrevButton = () => {
+    const {page} = this.state
+    if (page !== 1) {
+      this.setState(
+        prevState => ({page: prevState.page - 1}),
+        this.getPopularData,
+      )
+    }
   }
 
   renderPopularMovie = () => {
@@ -81,11 +106,29 @@ class Home extends Component {
   }
 
   render() {
+    const {page} = this.state
     return (
       <div className="HomeContainer">
         <Header />
         <div className="homeMovieContainer">
           {this.renderPopularMovieResult()}
+        </div>
+        <div className="pageContainer">
+          <button
+            type="button"
+            className="prevButton"
+            onClick={this.onClickPrevButton}
+          >
+            Prev
+          </button>
+          <p className="pageCount">{page}</p>
+          <button
+            type="button"
+            className="prevButton"
+            onClick={this.onClickNextButton}
+          >
+            Next
+          </button>
         </div>
       </div>
     )
